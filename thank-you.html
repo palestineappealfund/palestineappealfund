@@ -3,34 +3,72 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Thank You - Palestine Appeal Fund</title>
-  <meta name="description" content="Thank you for your donation to Palestine Appeal Fund. Your support helps provide urgent aid to Gaza & Palestine.">
-  <meta property="og:title" content="Thank You - Palestine Appeal Fund">
-  <meta property="og:description" content="Your donation helps provide urgent aid to Gaza & Palestine.">
+  <title>THANK YOU!!! - Palestine Appeal Fund</title>
+  <meta name="description" content="THANKS FOR DONATING! YOUR SUPPORT IS SUPER LOUD AND AWESOME!">
+  <meta property="og:title" content="THANK YOU!!! - Palestine Appeal Fund">
+  <meta property="og:description" content="YOUR DONATION IS AMAZING! KEEP IT COMING!">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://i.imgur.com/aMOcoS3.png" />
   <meta name="twitter:card" content="summary_large_image">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Flashing text animation */
+    @keyframes flash {
+      0% { color: #ff0000; }
+      25% { color: #00ff00; }
+      50% { color: #ffff00; }
+      75% { color: #ff00ff; }
+      100% { color: #ff0000; }
+    }
+    .flashy {
+      animation: flash 1s infinite;
+    }
+    /* Moving button on hover */
+    #return-home:hover {
+      transform: translate(20px, 20px);
+      transition: transform 0.2s;
+    }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100">
   <section class="p-8 text-center max-w-2xl mx-auto">
-    <img src="https://i.imgur.com/aMOcoS3.png" alt="Palestine Appeal Fund Logo" class="mx-auto h-32 w-auto mb-6">
-    <h1 class="text-3xl font-bold mb-4">Thank You for Your Donation!</h1>
-    <p id="thank-you-message" class="mb-6">Your support helps provide urgent aid to Gaza & Palestine. We’ve sent a confirmation to your email.</p>
-    <p class="mb-6">Your generosity makes a real difference in providing medical relief, food, water, and shelter to those in need.</p>
-    <a href="https://palestineappealfund.vercel.app" class="px-6 py-3 bg-red-600 rounded hover:bg-red-500 font-semibold transition transform duration-200 hover:scale-105" aria-label="Return to Palestine Appeal Fund Home">Return to Home</a>
+    <img src="https://i.imgur.com/aMOcoS3.png" alt="Palestine Appeal Fund Logo" class="mx-auto h-32 w-auto mb-6 animate-bounce">
+    <h1 class="text-5xl font-bold mb-4 flashy">THANK YOU!!!!!</h1>
+    <p id="thank-you-message" class="text-2xl mb-6 flashy">WOW! YOUR $${amount} ${plan} DONATION IS AMAZING! THANK YOU! THANK YOU! THANK YOU!</p>
+    <p class="text-xl mb-6 flashy">YOUR GENEROSITY IS SO LOUD IT’S SHAKING GAZA! KEEP DONATING! DONATE MORE! DONATE AGAIN!</p>
+    <div id="return-home-container" class="hidden">
+      <a href="https://palestineappealfund.vercel.app" id="return-home" class="px-6 py-3 bg-red-600 rounded hover:bg-yellow-500 font-semibold transition transform duration-200 inline-block" aria-label="Return to Palestine Appeal Fund Home">Return to Home (FINALLY!)</a>
+    </div>
   </section>
 
+  <!-- Auto-playing annoying sound -->
+  <audio id="annoying-sound" autoplay loop>
+    <source src="https://www.myinstants.com/media/sounds/annoying.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <script>
-    // Parse URL parameters to display personalized thank-you message
+    // Parse URL parameters for personalized message
     const params = new URLSearchParams(window.location.search);
     const amount = params.get('amount');
     const plan = params.get('plan');
     const thankYouMessage = document.getElementById('thank-you-message');
 
     if (amount && plan) {
-      thankYouMessage.innerText = `Thank you for your $${amount} ${plan} donation! Your support helps provide urgent aid to Gaza & Palestine. We’ve sent a confirmation to your email.`;
+      thankYouMessage.innerText = `WOW! YOUR $${amount} ${plan.toUpperCase()} DONATION IS AMAZING! THANK YOU! THANK YOU! THANK YOU!`;
     }
+
+    // Annoying pop-up alerts (5 in a row)
+    setTimeout(() => alert("THANKS FOR DONATING!!!"), 1000);
+    setTimeout(() => alert("YOU’RE AWESOME!!! DONATE AGAIN SOON!"), 2000);
+    setTimeout(() => alert("WOW! YOUR SUPPORT IS LOUD!"), 3000);
+    setTimeout(() => alert("KEEP THE DONATIONS COMING!!!"), 4000);
+    setTimeout(() => alert("ONE MORE THANK YOU!!!"), 5000);
+
+    // Show "Return to Home" button after 10 seconds
+    setTimeout(() => {
+      document.getElementById('return-home-container').classList.remove('hidden');
+    }, 10000);
   </script>
 </body>
 </html>
