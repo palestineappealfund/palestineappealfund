@@ -237,14 +237,12 @@
         closePaymentModal();
         const email = document.getElementById('donorEmail').value || 'palestineappealfund@outlook.com';
         const config = {
-          public_key: "FLWPUBK-9fd9a9fec746ef20a887b3e8ca518d94-X", // Replace with your live public key for production
+          public_key: "FLWPUBK-9fd9a9fec746ef20a887b3e8ca518d94-X", // Replace with live key for production
           tx_ref: "PAF-" + Date.now(),
           amount: selectedAmount,
           currency: "USD",
           payment_options: "card,banktransfer,ussd,mobilemoney",
-          customer: {
-            email: email,
-          },
+          customer: { email: email },
           customizations: {
             title: "Palestine Appeal Fund",
             description: selectedPlan === 'monthly' ? "Monthly donation to support Gaza & Palestine" : "Donation to support Gaza & Palestine",
@@ -257,9 +255,7 @@
               alert(`Payment ${response.status}. Please try again or contact support at palestineappealfund@outlook.com.`);
             }
           },
-          onclose: function() {
-            // Optional: Handle modal close
-          },
+          onclose: function() {},
         };
 
         if (selectedPlan === 'monthly') {
@@ -276,7 +272,7 @@
         const paymentData = {
           price_amount: selectedAmount,
           price_currency: "usd",
-          pay_currency: "BTC", // Default to BTC, donor can choose other currencies
+          pay_currency: "BTC",
           order_id: "PAF-CRYPTO-" + Date.now(),
           order_description: `${selectedPlan} donation to Palestine Appeal Fund`,
           customer_email: email,
@@ -309,64 +305,68 @@
           });
       }
     </script>
-  </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="p-8 bg-slate-950 text-center">
-    <h2 class="text-2xl font-bold mb-6 text-slate-100">Get in Touch</h2>
-    <div class="max-w-2xl mx-auto bg-slate-900 rounded-lg shadow-lg p-6 transition-transform duration-300 hover:shadow-xl">
-      <p class="mb-4 text-slate-300">We'd love to hear from you. Reach out for inquiries, partnerships, or to learn more about our mission.</p>
-      
-      <!-- Contact Form -->
-      <div class="mt-6">
-        <h3 class="text-xl font-semibold mb-4 text-slate-100">Send Us a Message</h3>
-        <form action="https://formspree.io/f/mnnzeraw" method="POST" class="flex flex-col gap-4">
-          <input type="hidden" name="_next" value="https://palestineappealfund.vercel.app/form-thank-you.html">
-          <input type="hidden" name="_gotcha" style="display:none !important">
-          <input type="hidden" name="_subject" value="Contact Form Submission">
-          <label for="name" class="sr-only">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="Your Name" class="p-2 rounded border border-slate-700 bg-slate-800 text-slate-100 focus:outline-none focus:border-red-500" required>
-          <label for="email" class="sr-only">Your Email</label>
-          <input type="email" id="email" name="email" placeholder="Your Email" class="p-2 rounded border border-slate-700 bg-slate-800 text-slate-100 focus:outline-none focus:border-red-500" required>
-          <label for="message" class="sr-only">Your Message</label>
-          <textarea id="message" name="message" placeholder="Your Message" rows="4" class="p-2 rounded border border-slate-700 bg-slate-800 text-slate-100 focus:outline-none focus:border-red-500" required></textarea>
-          <button type="submit" class="px-6 py-3 bg-red-600 rounded hover:bg-red-500 font-semibold transition transform duration-200 hover:scale-105" aria-label="Send Message to Palestine Appeal Fund">Send Message</button>
-        </form>
+    <!-- CONTACT -->
+    <section id="contact" class="p-8 bg-slate-950 text-center">
+      <h2 class="text-2xl font-bold mb-6 text-slate-100">Get in Touch</h2>
+      <div class="max-w-2xl mx-auto bg-slate-900 rounded-lg shadow-lg p-6 transition-transform duration-300 hover:shadow-xl">
+        <p class="mb-4 text-slate-300">We'd love to hear from you. Reach out for inquiries, partnerships, or to learn more about our mission.</p>
+        
+        <!-- Contact Form -->
+        <div class="mt-6">
+          <h3 class="text-xl font-semibold mb-4 text-slate-100">Send Us a Message</h3>
+          <form action="https://formspree.io/f/mnnzeraw" method="POST" class="flex flex-col gap-4">
+            <input type="hidden" name="_next" value="https://palestineappealfund.vercel.app/form-thank-you.html">
+            <input type="hidden" name="_gotcha" style="display:none !important">
+            <input type="hidden" name="_subject" value="Contact Form Submission">
+            <label for="name" class="sr-only">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" class="p-2 rounded border border-slate-700 bg-slate-800 text-slate-100 focus:outline-none focus:border-red-500" required>
+            <label for="email" class="sr-only">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" class="p-2 rounded border border-slate-700 bg-slate-800 text-slate-100 focus:outline-none focus:border-red-500" required>
+            <label for="message" class="sr-only">Your Message</label>
+            <textarea id="message" name="message" placeholder="Your Message" rows="4" class="p-2 rounded border border-slate-700 bg-slate-800 text-slate-100 focus:outline-none focus:border-red-500" required></textarea>
+            <button type="submit" class="px-6 py-3 bg-red-600 rounded hover:bg-red-500 font-semibold transition transform duration-200 hover:scale-105" aria-label="Send Message to Palestine Appeal Fund">Send Message</button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="flex flex-col items-center gap-4 mb-6 mt-6">
+          <div class="flex items-center gap-3">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            <a href="mailto:palestineappealfund@outlook.com" class="text-red-500 hover:underline text-lg" aria-label="Email Palestine Appeal Fund">palestineappealfund@outlook.com</a>
+          </div>
+          <div class="flex items-center gap-3">
+            <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+            </svg>
+            <a href="https://x.com/PALESTINE_FUND?t=Laji3CpOke3mbdGrNNTPgw&s=09" target="_blank" class="text-red-500 hover:underline text-lg" aria-label="Follow Palestine Appeal Fund on X">@PALESTINE_FUND</a>
+          </div>
+          <div class="flex items-center gap-3">
+            <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 4.41 2.87 8.14 6.84 9.49.5.09.68-.22.68-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0112 6.84c.85.004 1.71.11 2.52.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48 3.96-1.35 6.83-5.08 6.83-9.49 0-5.5-4.46-9.96-9.96-9.96z"></path>
+            </svg>
+            <a href="https://www.instagram.com/palestine_apeal_fund?igsh=MWpsanAweWlzeHM5dw" target="_blank" class="text-red-500 hover:underline text-lg" aria-label="Follow Palestine Appeal Fund on Instagram">@palestine_apeal_fund</a>
+          </div>
+        </div>
+
+        <!-- Call to Action -->
+        <p class="mt-6 mb-4 text-slate-300">Follow us on social media for updates on our work and ways to get involved.</p>
+        <a href="#donate" class="inline-block px-6 py-3 bg-red-600 rounded hover:bg-red-500 font-semibold transition transform duration-200 hover:scale-105" aria-label="Support Palestine Appeal Fund">Support Our Mission</a>
       </div>
+    </section>
 
-      <!-- Contact Info -->
-      <div class="flex flex-col items-center gap-4 mb-6 mt-6">
-        <div class="flex items-center gap-3">
-          <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-          </svg>
-          <a href="mailto:palestineappealfund@outlook.com" class="text-red-500 hover:underline text-lg" aria-label="Email Palestine Appeal Fund">palestineappealfund@outlook.com</a>
-        </div>
-        <div class="flex items-center gap-3">
-          <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-          </svg>
-          <a href="https://x.com/PALESTINE_FUND?t=Laji3CpOke3mbdGrNNTPgw&s=09" target="_blank" class="text-red-500 hover:underline text-lg" aria-label="Follow Palestine Appeal Fund on X">@PALESTINE_FUND</a>
-        </div>
-        <div class="flex items-center gap-3">
-          <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2.04c-5.5 0-9.96 4.46-9.96 9.96 0 4.41 2.87 8.14 6.84 9.49.5.09.68-.22.68-.48v-1.69c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.12-1.47-1.12-1.47-.91-.62.07-.61.07-.61 1.01.07 1.54 1.04 1.54 1.04.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.58 9.58 0 0112 6.84c.85.004 1.71.11 2.52.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48 3.96-1.35 6.83-5.08 6.83-9.49 0-5.5-4.46-9.96-9.96-9.96z"></path>
-          </svg>
-          <a href="https://www.instagram.com/palestine_apeal_fund?igsh=MWpsanAweWlzeHM5dw" target="_blank" class="text-red-500 hover:underline text-lg" aria-label="Follow Palestine Appeal Fund on Instagram">@palestine_apeal_fund</a>
-        </div>
-      </div>
+    <!-- FOOTER -->
+    <footer class="p-8 bg-slate-900 text-center text-slate-300">
+      <p>Palestine Appeal Fund is dedicated to transparency. Contact us at <a href="mailto:palestineappealfund@outlook.com" class="text-red-500 hover:underline" aria-label="Email Palestine Appeal Fund for inquiries">palestineappealfund@outlook.com</a> for inquiries or verification.</p>
+      <p class="mt-2">&copy; 2025 Palestine Appeal Fund. All rights reserved.</p>
+    </footer>
 
-      <!-- Call to Action -->
-      <p class="mt-6 mb-4 text-slate-300">Follow us on social media for updates on our work and ways to get involved.</p>
-      <a href="#donate" class="inline-block px-6 py-3 bg-red-600 rounded hover:bg-red-500 font-semibold transition transform duration-200 hover:scale-105" aria-label="Support Palestine Appeal Fund">Support Our Mission</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="p-8 bg-slate-900 text-center text-slate-300">
-    <p>Palestine Appeal Fund is dedicated to transparency. Contact us at <a href="mailto:palestineappealfund@outlook.com" class="text-red-500 hover:underline" aria-label="Email Palestine Appeal Fund for inquiries">palestineappealfund@outlook.com</a> for inquiries or verification.</p>
-    <p class="mt-2">&copy; 2025 Palestine Appeal Fund. All rights reserved.</p>
-  </footer>
-
-</body>
+    <!-- Speed Insights Script -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+  </body>
 </html>
