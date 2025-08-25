@@ -71,7 +71,7 @@
 
     <!-- FAMINE IN GAZA CONTENT -->
     <h3 class="text-xl font-bold mb-4 mt-6">Famine in Gaza</h3>
-    <img src="https://i.postimg.cc/bNbNTWK5/nvhqi77nml6im0r83d232g2bxg2rh8dp-1.jpg" alt="Children in Gaza famine crisis" class="w-full rounded-xl shadow-lg mb-4">
+    <img src="https://i.postimg.cc/bNbNTWK5/nvhqi77nml6im0r83d232g2bxg2rh8dp spanish-1.jpg" alt="Children in Gaza famine crisis" class="w-full rounded-xl shadow-lg mb-4">
     <p class="mb-4">
       Famine persists in Gaza as of 2025. <strong>Over 100,000 children remain at risk of malnutrition</strong> due to limited access to food supplies (Source: UN Report, 2025).
     </p>
@@ -173,7 +173,6 @@
           document.querySelector('.donation-toggle button:nth-child(2)').classList.add('bg-green-600', 'border-green-600');
           document.querySelector('.donation-toggle button:nth-child(2)').classList.remove('border-white');
         }
-        // Update description based on selected plan and amount
         document.getElementById('donation-description').innerText = donationNarration[selectedPlan][selectedAmount] || `$${selectedAmount} ${selectedPlan} donation will help save lives in Gaza.`;
       }
 
@@ -217,11 +216,11 @@
         }
 
         const config = {
-          public_key: "FLWPUBK-9fd9a9fec746ef20a887b3e8ca518d94-X",
+          public_key: "FLWPUBK-9fd9a9fec746ef20a887b3e8ca518d94-X", // Replace with your live public key for production
           tx_ref: "PAF-" + Date.now(),
           amount: selectedAmount,
           currency: "USD",
-          payment_options: "card,banktransfer,ussd",
+          payment_options: "card,banktransfer,ussd,mobilemoney",
           customer: {
             email: email,
           },
@@ -231,9 +230,15 @@
             logo: "https://i.imgur.com/aMOcoS3.png",
           },
           callback: function(response) {
-            alert(`Thank you for your ${selectedPlan} donation! Payment status: ${response.status}`);
+            if (response.status === "successful") {
+              window.location.href = `https://palestineappealfund.vercel.app/thank-you.html?amount=${selectedAmount}&plan=${selectedPlan}`;
+            } else {
+              alert(`Payment ${response.status}. Please try again or contact support at palestineappealfund@outlook.com.`);
+            }
           },
-          onclose: function() {},
+          onclose: function() {
+            // Optional: Handle cases where user closes the payment modal without completing
+          },
         };
 
         // Add payment_plan for monthly donations
@@ -256,7 +261,7 @@
       <div class="mt-6">
         <h3 class="text-xl font-semibold mb-4 text-slate-100">Send Us a Message</h3>
         <form action="https://formspree.io/f/mnnzeraw" method="POST" class="flex flex-col gap-4">
-          <input type="hidden" name="_next" value="https://yourdomain.com/thank-you">
+          <input type="hidden" name="_next" value="https://palestineappealfund.vercel.app/thank-you.html">
           <input type="hidden" name="_gotcha" style="display:none !important">
           <input type="hidden" name="_subject" value="Contact Form Submission">
           <label for="name" class="sr-only">Your Name</label>
